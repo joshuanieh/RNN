@@ -18,7 +18,7 @@ class BasicBlock(nn.Module):
 class LSTM(nn.Module):
     def __init__(self, input_dim, hidden_dim):
         super().__init__()
-        self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers=1, dropout = 0.25, bidirectional = True, batch_first=True)
+        self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers=1, dropout = 0.5, bidirectional = True, batch_first=True)
     def forward(self, x):
         #print(x.shape)
         x = torch.reshape(x, (1, x.shape[0], x.shape[1]))
@@ -41,24 +41,21 @@ class Classifier(nn.Module):
         self.fc = nn.Sequential(
             LSTM(input_dim, hidden_dim),
             nn.BatchNorm1d(hidden_dim*2),
-            nn.Sigmoid(),
             LSTM(hidden_dim*2, hidden_dim),
             nn.BatchNorm1d(hidden_dim*2),
-            nn.Sigmoid(),
             LSTM(hidden_dim*2, hidden_dim),
             nn.BatchNorm1d(hidden_dim*2),
-            nn.Sigmoid(),
             LSTM(hidden_dim*2, hidden_dim),
             nn.BatchNorm1d(hidden_dim*2),
-            nn.Sigmoid(),
             LSTM(hidden_dim*2, hidden_dim),
             nn.BatchNorm1d(hidden_dim*2),
-            nn.Sigmoid(),
+            nn.Dropout(0.5),
             nn.Linear(hidden_dim*2, hidden_dim),
             nn.BatchNorm1d(hidden_dim),
-            nn.Sigmoid(),
+            nn.ReLU(),
+            nn.Dropout(0.5),
             nn.Linear(hidden_dim, output_dim),
-            nn.Sigmoid()
+            nn.ReLU()
         )
 
     def forward(self, x):

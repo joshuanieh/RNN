@@ -5,9 +5,9 @@ train_ratio = 0.8               # the ratio of data used for training, the rest 
 # training parameters
 seed = 0                        # random seed
 batch_size = 512                # batch size
-num_epoch = 10                  # the number of training epoch
+num_epoch = 30                  # the number of training epoch
 learning_rate = 0.0001           # learning rate
-model_path = './model.ckpt'     # the path where the checkpoint will be saved
+model_path = './model1.ckpt'     # the path where the checkpoint will be saved
 
 # model parameters
 input_dim = 39 * concat_nframes # the input dim of the model, you should not change the value
