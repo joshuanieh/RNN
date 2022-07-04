@@ -59,7 +59,7 @@ def preprocess_data(split, feat_dir, phone_path, concat_nframes, train_ratio=0.8
         # split training and validation data
         usage_list = open(os.path.join(phone_path, 'train_split.txt')).readlines()
         random.seed(train_val_seed)
-        random.shuffle(usage_list)
+        #random.shuffle(usage_list)
         percent = int(len(usage_list) * train_ratio)
         usage_list = usage_list[:percent] if split == 'train' else usage_list[percent:]
     elif split == 'test':
@@ -131,7 +131,7 @@ del train_X, train_y, val_X, val_y
 gc.collect()
 
 # get dataloader
-train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True)
+train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=False)
 val_loader = DataLoader(val_set, batch_size=batch_size, shuffle=False)
 
 device = 'cuda:0' if torch.cuda.is_available() else 'cpu'

@@ -1,11 +1,11 @@
 # data prarameters
-concat_nframes = 19             # the number of frames to concat with, n must be odd (total 2k+1 = n frames)
+concat_nframes = 1             # the number of frames to concat with, n must be odd (total 2k+1 = n frames)
 train_ratio = 0.8               # the ratio of data used for training, the rest will be used for validation
 
 # training parameters
 seed = 0                        # random seed
 batch_size = 512                # batch size
-num_epoch = 30                  # the number of training epoch
+num_epoch = 3                  # the number of training epoch
 learning_rate = 0.0001           # learning rate
 model_path = './model1.ckpt'     # the path where the checkpoint will be saved
 
